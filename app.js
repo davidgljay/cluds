@@ -3,13 +3,13 @@ express = require('express'),
 routes = require('./routes'),
 http = require('http'),
 hue = require('node-hue-api'),
-config = require('./config.js'),
+//config = require('./config.js'),
 path = require('path');
 
 var app = express();
 
 //Sets process.env variables for the application.
-config.setup();
+//config.setup();
 
 var options = {
   APIKey: process.env.FORECAST_API_KEY
