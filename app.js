@@ -8,14 +8,16 @@ path = require('path');
 
 var app = express();
 
+//Sets process.env variables for the application.
+config.setup();
+
 var options = {
   APIKey: process.env.FORECAST_API_KEY
 },
 forecast = new Forecast(options);
 
 
-//Sets process.env variables for the application.
-config.setup();
+
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -39,8 +41,10 @@ app.get('/', routes.index)
 app.get('/cluds.json', function(req, res){
 	forecast.get(process.env.LATITUDE, process.env.LONGITUDE, function (err, response, data) {
 	  if (err) throw err;
-	  var cluds = data.hourly.data.map(function(hour) {return {hour: new Date(hour.time * 1000), cover: hour.cloudCover};});
-	  res.send(cluds);
+	  var cluds = data.hourly.data.map(function(hour) {return {hour: hour.time * 1000, cover: hour.cloudCover, precip: hour.precipProbability};});
+	  var current = data.currently.summary;
+	  var icon = data.currently.icon;
+	  res.send({current: current, cluds: cluds, icon: icon});
 	});
 });
 

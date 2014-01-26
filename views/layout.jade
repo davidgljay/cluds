@@ -1,7 +1,18 @@
-doctype 5
-html
+doctype html
+html(ng-app='cluds')
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/vendor/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/vendor/bootstrap-theme.min.css')
+    script(src='/javascripts/vendor/angular/angular.min.js')
+    script(src='/javascripts/vendor/angularjs-geolocation/dist/angularjs-geolocation.min.js')
+    script(src='/javascripts/app.js')
+    script(src='/javascripts/factories.js')
+    script(src='/javascripts/controllers.js')
+    script(src='/javascripts/directives.js')
   body
+    nav(class="navbar navbar-default" role="navigation")
+      div(class="navbar-header")
+        a(class="navbar-brand") Cluds
     block content
